@@ -12,10 +12,12 @@ from polymetis import Gripperinterface
 if __name__ == "__main__":
     # Initialize robot interface
     robot = RobotInterface(
-        ip_address="localhost",
+        ip_address="10.10.10.210",
+        port = 50051
     )
     gripper = Gripperinterface (
-        ip_address = "???"
+        ip_address = "10.10.10.210",
+        port = 50051
     )
     # Reset
     robot.go_home()
@@ -37,6 +39,6 @@ if __name__ == "__main__":
 
     #test gripper
 
-    gripper_state = gripper.get_state()
-    gripper.goto(width=0.01, speed=0.05)
-    gripper.grasp(speed=0.05, force=0.1)
+    #gripper_state = gripper.get_state()
+    #gripper.goto(width=0.01, speed=0.05)
+    #gripper.grasp(speed=0.05, force=0.1)
