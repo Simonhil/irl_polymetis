@@ -15,17 +15,18 @@ if __name__ == "__main__":
         ip_address="10.10.10.210",
         port = 50051
     )
-    gripper = Gripperinterface (
-        ip_address = "10.10.10.210",
-        port = 50051
-    )
+    #gripper = Gripperinterface (
+        #ip_address = "10.10.10.210",
+        #port = 50051
+    #)
     # Reset
-    robot.go_home()
+    #robot.go_home()
 
     # Get joint positions
     joint_positions = robot.get_joint_positions()
     print(f"Current joint positions: {joint_positions}")
 
+    robot.set_home_pose(joint_positions)
     # Command robot to pose (move 4th and 6th joint)
     joint_positions_desired = torch.Tensor(
         [-0.14, -0.02, -0.05, -1.57, 0.05, 1.50, -0.91]
@@ -37,6 +38,8 @@ if __name__ == "__main__":
     joint_positions = robot.get_joint_positions()
     print(f"New joint positions: {joint_positions}")
 
+
+    robot.go_home()
     #test gripper
 
     #gripper_state = gripper.get_state()
