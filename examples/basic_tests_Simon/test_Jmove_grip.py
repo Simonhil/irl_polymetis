@@ -5,14 +5,15 @@
 import torch
 
 from polymetis import RobotInterface
-from polymetis import Gripperinterface
+from torchcontrol.modules.feedforward import Coriolis
+#from polymetis import Gripperinterface
 
 
 
 if __name__ == "__main__":
     # Initialize robot interface
     robot = RobotInterface(
-        ip_address="10.10.10.210",
+        ip_address= "10.10.10.210",
         port = 50051
     )
     #gripper = Gripperinterface (
@@ -32,12 +33,16 @@ if __name__ == "__main__":
         [-0.14, -0.02, -0.05, -1.57, 0.05, 1.50, -0.91]
     )
     print(f"\nMoving joints to: {joint_positions_desired} ...\n")
-    state_log = robot.move_to_joint_positions(joint_positions_desired, time_to_go=2.0)
+    state_log = robot.move_to_joint_positions(joint_positions_desired, time_to_go=4.0)
 
     # Get updated joint positions
-    joint_positions = robot.get_joint_positions()
-    print(f"New joint positions: {joint_positions}")
+    state = robot.get_joint_positions()
+    corioles= Coriolis(robot.robot_model)
+    test_output= robot.get_robot_state()
+    
 
+    print(f"testresult: {test_output}")
+  
 
     robot.go_home()
     #test gripper
